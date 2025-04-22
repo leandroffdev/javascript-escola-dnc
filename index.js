@@ -52,8 +52,12 @@ if(idade >= 18) {
     console.log("NÃO pode comprar bebida alcoolica");
 }
 
-// Idade 2
+// Idade 2 - Operador ternário
 idade >= 18 ? console.log("pode comprar"): console.log("NAO pode");
+
+let numero = 10
+let resultado = numero > 0 ? "Positivo" : (numero < 0 ? "Negativo" : "Zero");
+console.log(resultado);
 
 //  IMC classificador
 const imc = calculateIMC(person).imc
@@ -130,3 +134,100 @@ switch (fruta) {
       console.log('Fruta desconhecida');
   }
   
+  // Object Mapping *
+  let dia = 0;
+
+  const DAYS_OF_WEEK_DICT = { // Dicionario (chave/valor)
+    1: "Domingo",
+    2: "Segunda",
+    3: "Terça",
+    4: "Quarta",
+    5: "Quinta",
+    6: "Sexta",
+    7: "Sábado",
+  }
+
+  console.log(DAYS_OF_WEEK_DICT[dia] || "Dia desconhecido");
+
+// Laços e iterações
+
+// FOR
+for(let i = 1; i < 7; i++){
+    console.log(DAYS_OF_WEEK_DICT[i]);
+}
+
+for(let i = 0; i < 7; i++) {
+    if(i % 2 == 0) {
+        console.log("Número par: " + i);
+    }
+    else {
+        console.log("Número ímpar: " + i);
+    }
+}
+
+// While
+let num = 1;
+while(num <= 5) {
+    console.log("num: ", num);
+    num++;
+}
+/*
+let isCorrect = false;
+let selectedNumber = Math.floor(Math.random() * 10) + 1;
+console.log(selectedNumber);
+while(!isCorrect) {
+    //let guess = prompt("Qual valor o computador escolheu entre 1 e 10?");
+    if(Number(guess) === selectedNumber) isCorrect = true;
+}
+*/
+// DO-WHILE
+let numero1 = 0
+do {
+    numero1++;
+    console.log("Tentativa: ", numero1);
+}while(numero1 < 5);
+
+// FOR-IN -> chave-valor (objetos)
+let pessoa = {
+    name: "Leandro", 
+    age: 37, 
+    height: 180,
+    documento: 12345678900
+};
+for (let chave in pessoa) {
+    console.log(`Chave: ${chave}, Valor: ${pessoa[chave]}`);
+}
+
+let tasks = {
+    "Caminhar com o cachorro": true,
+    "comprar ingredientes para o café da manhã": true,
+    "Preparar almoço": false,
+    "Ir para academia": false,
+}
+
+for (let key in tasks) {
+    console.log(`Tarefa: ${key} está ${tasks[key] ? "concluída" : "Incompleta"}`);
+}
+
+// FOR-OF -> item por item (arrays, lista, strings)
+let cidades = ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Curitiba", "Salvador"];
+for(let cidade of cidades) {
+    console.log(`${cidade}\n`);
+}
+
+let nome = "Leandro"
+for(let letra of nome) {
+    console.log(letra);
+}
+
+let produtos = [
+    { name: "Café", price: 5.00 }, 
+    { name: "Pão", price: 2.50 }, 
+    { name: "Leite", price: 3.00 }
+]
+let total = 0
+for(let item of produtos) {
+    console.log(`Produto: ${item.name}, Preço: R$ ${item.price.toFixed(2)}`);
+    total += item.price;
+}
+console.log(`Total acumulado: R$ ${total.toFixed(2)}`);
