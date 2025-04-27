@@ -24,14 +24,20 @@ function tarefa(descricao, prioridade, status) {
 listaTarefas.push(tarefa("correr", 3, "pendente"));
 listaTarefas.push(tarefa("dormir", 1, "pendente"));
 listaTarefas.push(tarefa("caminhar", 2, "concluída"));
+listaTarefas.push(tarefa("falar", 1, "pendente"));
 console.log(listaTarefas);
 
 // [OK] Remover Tarefas Concluídas:
 // - Utilize o método filter para criar uma nova lista apenas com as tarefas pendentes.
-const tarefasPendentes = listaTarefas.filter((item) => {
+/*
+const tarefasPendentes = listaTarefas.filter((item) => {            // Forma 1
     return item.status == "pendente";
 });
-console.log(tarefasPendentes);
+*/
+const tarefasPendentes = listaTarefas.filter(({status}) => {        // Forma 2
+    return status === "pendente";
+})
+console.log("Tarefas pendentes:", tarefasPendentes);
 
 // [OK] Marcar Tarefas como Concluídas:
 // - Utilize o método map para alterar o status de uma tarefa específica para "concluída".
@@ -41,29 +47,36 @@ const alteraStatus = listaTarefas.map((item) => {
 });
 console.log(alteraStatus);
 
-// Ordenar Tarefas por Prioridade:
+// [OK] Ordenar Tarefas por Prioridade:
 // - Utilize o método sort para ordenar as tarefas pela propriedade prioridade.
-const ordenaPrioridade = listaTarefas.sort(item => {
+const ordenaPrioridade = listaTarefas.sort((anterior, posterior)=> {
+    // if(anterior.prioridade < posterior.prioridade) return -1     // Forma 1
+    return anterior.prioridade - posterior.prioridade               // Forma 2
 });
-console.log(ordenaPrioridade);
+console.log("Lista ordenada:", ordenaPrioridade);
 
-// Contar Tarefas Pendentes:
+// [OK] Contar Tarefas Pendentes:
 listaTarefas.push(tarefa("jogar", 3, "pendente"));
-listaTarefas.push(tarefa("estudar", 1, "pendente"));
-listaTarefas.push(tarefa("estudar", 1, "pendente"));
-listaTarefas.push(tarefa("estudar", 1, "concluída"));
-listaTarefas.push(tarefa("estudar", 1, "pendente"));
-listaTarefas.push(tarefa("assistir", 2, "concluída"));
+listaTarefas.push(tarefa("estudar", 3, "pendente"));
 // - Utilize o método reduce para contar quantas tarefas estão pendentes.
 const contaPendentes = listaTarefas.reduce((contador, proxItem) => {
-    if (proxItem.status === "pendente") {
-        contador++;
-    }
+    if (proxItem.status === "pendente") contador++;
     return contador;
 }, 0);
 console.log("Contador:", contaPendentes);
 
-// Encontrar Tarefa Específica:
+// [OK] Encontrar Tarefa Específica:
 // - Utilize o método find para localizar uma tarefa específica pela descrição.
+const oQue = "dormir";
+const task = listaTarefas.find((item) => {  // Retorna a primeira ocorrencia
+    return item.descricao === oQue;
+});
+console.log(task);
 
+// Verificar se todas as tarefas estao concluídas
+const isEveryTasksDone = listaTarefas.every(task => task.status === "concluída")
+console.log("Todas as tarefas estão concluídas:", isEveryTasksDone)
 
+// Verificar se algumas das tarefas estao concluídas
+const isSomeTasksDone = listaTarefas.some(task => task.status === "concluída")
+console.log("Algumas das tarefas estão concluídas:", isSomeTasksDone);
